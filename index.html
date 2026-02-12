@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pallavi, with all my heart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #f4efe4;
+            --dark-brown: #3d2817;
+            --warm-brown: #6b4423;
+            --copper: #b87333;
+            --gold: #d4a843;
+            --cream: #faf7f2;
+            --rose: #c97b7b;
+            --blush: #e8c4c4;
+            --shadow: rgba(61, 40, 23, 0.15);
+            --bg-gradient-1: #e8dcc8;
+            --bg-gradient-2: #f4efe4;
+            --card-border: var(--warm-brown);
+            --card-outer-ring: var(--parchment);
+            --card-outer-border: rgba(107, 68, 35, 0.1);
+            --inner-border: rgba(184, 115, 51, 0.15);
+            --popup-bg-overlay: rgba(61, 40, 23, 0.75);
+
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+            --font-script: 'Great Vibes', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 50%, var(--bg-gradient-1) 100%);
+            transition: background 0.8s ease, color 0.8s ease;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Vintage paper texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(61, 40, 23, 0.02) 2px, rgba(61, 40, 23, 0.02) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(61, 40, 23, 0.02) 2px, rgba(61, 40, 23, 0.02) 4px);
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Ambient floating petals */
+        .ambient-petal {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1;
+            animation: floatPetal linear infinite;
+            font-size: 1.5rem;
+        }
+
+        @keyframes floatPetal {
+            0% {
+                transform: translateY(110vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(50vh) rotate(180deg) translateX(40px);
+                opacity: 0.5;
+            }
+
+            95% {
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg) translateX(-20px);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle particles */
+        .sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: sparkleFloat 6s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFloat {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+        }
+
+        /* Corner decorations with floral motifs */
+        .corner-decor {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+            opacity: 0.12;
+            z-index: 2;
+        }
+
+        .corner-decor::before,
+        .corner-decor::after {
+            content: '';
+            position: absolute;
+            background: var(--warm-brown);
+        }
+
+        .corner-decor.top-left {
+            top: 10px;
+            left: 10px;
+        }
+
+        .corner-decor.top-left::before {
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+        }
+
+        .corner-decor.top-left::after {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        .corner-decor.top-right {
+            top: 10px;
+            right: 10px;
+        }
+
+        .corner-decor.top-right::before {
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+        }
+
+        .corner-decor.top-right::after {
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        .corner-decor.bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .corner-decor.bottom-left::before {
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+        }
+
+        .corner-decor.bottom-left::after {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        .corner-decor.bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .corner-decor.bottom-right::before {
+            bottom: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+        }
+
+        .corner-decor.bottom-right::after {
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        /* Floral corner icons */
+        .corner-flower {
+            position: fixed;
+            font-size: 1.6rem;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 2;
+        }
+
+        .corner-flower.tl {
+            top: 18px;
+            left: 18px;
+        }
+
+        .corner-flower.tr {
+            top: 18px;
+            right: 18px;
+        }
+
+        .corner-flower.bl {
+            bottom: 18px;
+            left: 18px;
+        }
+
+        .corner-flower.br {
+            bottom: 18px;
+            right: 18px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 640px;
+            width: 100%;
+            background: var(--cream);
+            padding: 60px 50px;
+            border: 3px solid var(--warm-brown);
+            box-shadow:
+                0 25px 70px var(--shadow),
+                inset 0 0 0 1px rgba(184, 115, 51, 0.2),
+                0 0 0 12px var(--parchment),
+                0 0 0 14px rgba(107, 68, 35, 0.1);
+            position: relative;
+            z-index: 10;
+            animation: containerEnter 1.2s ease-out;
+        }
+
+        @keyframes containerEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Inner border decoration */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            pointer-events: none;
+        }
+
+        /* Decorative flourish */
+        .flourish {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--copper);
+            margin-bottom: 10px;
+            letter-spacing: 6px;
+            animation: flourishFade 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes flourishFade {
+            from {
+                opacity: 0;
+                letter-spacing: 20px;
+            }
+
+            to {
+                opacity: 1;
+                letter-spacing: 6px;
+            }
+        }
+
+        /* Floral top decoration */
+        .floral-top {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-out 0.2s both;
+            letter-spacing: 10px;
+        }
+
+        .greeting {
+            font-family: var(--font-script);
+            font-size: 2.2rem;
+            color: var(--warm-brown);
+            text-align: center;
+            margin-bottom: 8px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .years-together {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--copper);
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+            opacity: 0.7;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            margin: 0 auto 25px;
+            animation: fadeIn 1s ease-out 0.55s both;
+        }
+
+        /* Question */
+        .question {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--warm-brown);
+            text-align: center;
+            margin: 30px 0;
+            line-height: 1.3;
+            animation: questionReveal 1.2s ease-out 0.6s both;
+            position: relative;
+        }
+
+        .question::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        @keyframes questionReveal {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Shimmer on question text */
+        .question-shimmer {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(120deg,
+                    var(--warm-brown) 0%,
+                    var(--warm-brown) 40%,
+                    var(--gold) 50%,
+                    var(--warm-brown) 60%,
+                    var(--warm-brown) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                background-position: 200% center;
+            }
+
+            50% {
+                background-position: -200% center;
+            }
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            color: var(--warm-brown);
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+            opacity: 0.75;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 35px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            padding: 16px 48px;
+            border: 2px solid var(--warm-brown);
+            background: transparent;
+            color: var(--dark-brown);
+            cursor: pointer;
+            transition: all 0.35s ease;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--warm-brown);
+            transition: width 0.5s ease, height 0.5s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            color: var(--cream);
+            border-color: var(--dark-brown);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, var(--warm-brown), #7d5230);
+            color: var(--cream);
+            border-color: var(--warm-brown);
+            box-shadow: 0 4px 15px rgba(107, 68, 35, 0.3);
+        }
+
+        .btn-yes::before {
+            background: var(--dark-brown);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.4);
+        }
+
+        .btn-no {
+            transition: all 0.3s ease;
+        }
+
+        .btn-no:hover {
+            opacity: 0.7;
+        }
+
+        /* Popup modal */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(61, 40, 23, 0.75);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: popupFadeIn 0.3s ease;
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background: var(--cream);
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid var(--warm-brown);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            position: relative;
+            animation: popupSlideIn 0.4s ease;
+        }
+
+        .popup-content::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(184, 115, 51, 0.12);
+            pointer-events: none;
+        }
+
+        @keyframes popupSlideIn {
+            from {
+                transform: scale(0.85) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .popup-emoji {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .popup-quote {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: var(--dark-brown);
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .popup-source {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--copper);
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .popup-reason {
+            font-size: 1.15rem;
+            color: var(--warm-brown);
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 18px 20px;
+            background: rgba(184, 115, 51, 0.06);
+            border-left: 3px solid var(--copper);
+            border-right: 3px solid var(--copper);
+            font-weight: 600;
+        }
+
+        .popup-counter {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--copper);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .popup-close {
+            font-family: var(--font-display);
+            padding: 14px 32px;
+            background: var(--warm-brown);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            display: block;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: var(--dark-brown);
+            transform: scale(1.04);
+        }
+
+        /* ================================
+           SUCCESS / CELEBRATION SCREEN
+           ================================ */
+        .success {
+            display: none;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .success.active {
+            display: block;
+        }
+
+        .success-heart {
+            font-size: 4rem;
+            animation: heartPulse 1.5s ease infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes heartPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15%,
+            35% {
+                transform: scale(1.15);
+            }
+
+            25%,
+            45% {
+                transform: scale(1.05);
+            }
+        }
+
+        .success-title {
+            font-family: var(--font-script);
+            font-size: 3rem;
+            color: var(--warm-brown);
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            font-size: 1.35rem;
+            color: var(--dark-brown);
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .success-promise {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            color: var(--copper);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(184, 115, 51, 0.2);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .success-flowers {
+            font-size: 1.8rem;
+            letter-spacing: 8px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        /* Fireworks canvas */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ================================
+           RESPONSIVE
+           ================================ */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            .greeting {
+                font-size: 1.8rem;
+            }
+
+            .question {
+                font-size: 1.8rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 15px 30px;
+            }
+
+            .success-title {
+                font-size: 2.2rem;
+            }
+
+            .popup-content {
+                padding: 35px 25px;
+            }
+        }
+
+        /* ================================
+           NIGHT THEME
+           ================================ */
+        body.night-mode {
+            --parchment: #1a1a2e;
+            --dark-brown: #e8d5c4;
+            --warm-brown: #c9a87c;
+            --copper: #d4a843;
+            --gold: #f0d78c;
+            --cream: #16213e;
+            --rose: #e07070;
+            --blush: #c97b7b;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --bg-gradient-1: #0f0c29;
+            --bg-gradient-2: #1a1a2e;
+            --card-border: #c9a87c;
+            --card-outer-ring: #1a1a2e;
+            --card-outer-border: rgba(201, 168, 124, 0.15);
+            --inner-border: rgba(201, 168, 124, 0.12);
+            --popup-bg-overlay: rgba(10, 10, 30, 0.85);
+        }
+
+        body.night-mode .container {
+            background: linear-gradient(135deg, #16213e, #1a1a3e);
+            border-color: var(--card-border);
+            box-shadow:
+                0 25px 70px var(--shadow),
+                inset 0 0 0 1px rgba(201, 168, 124, 0.15),
+                0 0 0 12px var(--card-outer-ring),
+                0 0 0 14px var(--card-outer-border),
+                0 0 40px rgba(201, 168, 124, 0.05);
+        }
+
+        body.night-mode .container::before {
+            border-color: var(--inner-border);
+        }
+
+        body.night-mode .popup-content {
+            background: linear-gradient(135deg, #16213e, #1a1a3e);
+            border-color: var(--card-border);
+        }
+
+        body.night-mode .popup-content::before {
+            border-color: var(--inner-border);
+        }
+
+        body.night-mode .popup {
+            background: var(--popup-bg-overlay);
+        }
+
+        body.night-mode .popup-reason {
+            background: rgba(201, 168, 124, 0.08);
+            border-left-color: var(--copper);
+            border-right-color: var(--copper);
+        }
+
+        body.night-mode .btn-yes {
+            background: linear-gradient(135deg, #c9a87c, #a8875c);
+            color: #16213e;
+            border-color: #c9a87c;
+        }
+
+        body.night-mode .btn-no {
+            border-color: #c9a87c;
+            color: #e8d5c4;
+        }
+
+        body.night-mode .popup-close {
+            background: #c9a87c;
+            color: #16213e;
+        }
+
+        body.night-mode .popup-close:hover {
+            background: #d4a843;
+        }
+
+        body.night-mode .corner-decor::before,
+        body.night-mode .corner-decor::after {
+            background: #c9a87c;
+        }
+
+        body.night-mode .sparkle {
+            background: #f0d78c;
+            box-shadow: 0 0 6px rgba(240, 215, 140, 0.4);
+        }
+
+        body.night-mode .divider {
+            background: linear-gradient(90deg, transparent, #c9a87c, transparent);
+        }
+
+        body.night-mode .question-shimmer {
+            background: linear-gradient(120deg,
+                    #c9a87c 0%, #c9a87c 40%,
+                    #f0d78c 50%,
+                    #c9a87c 60%, #c9a87c 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.night-mode .years-together {
+            color: #d4a843;
+        }
+
+        body.night-mode .success-promise {
+            border-top-color: rgba(201, 168, 124, 0.2);
+        }
+
+        /* Stars canvas for night mode */
+        #starsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        body.night-mode #starsCanvas {
+            opacity: 1;
+        }
+
+        /* Sound toggle button */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--copper);
+            background: var(--cream);
+            color: var(--warm-brown);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+            opacity: 0;
+            animation: fadeIn 1s ease 2s both;
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px var(--shadow);
+        }
+
+        body.night-mode .sound-toggle {
+            background: #16213e;
+            border-color: #c9a87c;
+            color: #c9a87c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars canvas (night mode) -->
+    <canvas id="starsCanvas"></canvas>
+
+    <!-- Sound toggle -->
+    <button class="sound-toggle" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+
+    <!-- Corner decorations -->
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+    <span class="corner-flower tl">🌼</span>
+    <span class="corner-flower tr">🌻</span>
+    <span class="corner-flower bl">🌻</span>
+    <span class="corner-flower br">🌼</span>
+
+    <!-- Sparkle particles -->
+    <div class="sparkle-container" id="sparkleContainer"></div>
+
+    <!-- Main card -->
+    <div class="container">
+        <div class="floral-top">🌼 🌻 🌼</div>
+        <div class="flourish">❦ ❦ ❦</div>
+
+        <h2 class="greeting">My Dearest Pannu,</h2>
+        <p class="years-together">~ 8 beautiful years & counting ~</p>
+        <div class="divider"></div>
+
+        <div id="question-section">
+            <h1 class="question">
+                <span class="question-shimmer">Will You Be My Valentine?</span>
+            </h1>
+            <p class="subtext">A question that, after 8 years, deserves only one answer...</p>
+
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="sayYes()">Yes</button>
+                <button class="btn btn-no" id="noBtn" onclick="sayNo()">No</button>
+            </div>
+        </div>
+
+        <div id="success-section" class="success">
+            <div class="success-heart">💝</div>
+            <h2 class="success-title">I Knew It, Pannu!</h2>
+            <p class="success-message">
+                You just made my heart do that thing again. 🥹<br>
+                Happy Valentine's Day, Pallavi Patil! ❤️
+            </p>
+            <p class="success-promise">
+                Here's to 8 years done and a lifetime to go —<br>
+                with all the Chaat, fries, and comfort show marathons<br>
+                your heart desires. 🌼🌻
+            </p>
+            <div class="success-flowers">🌼 🌻 💛 🌻 🌼</div>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p class="popup-emoji" id="popup-emoji"></p>
+            <p class="popup-quote" id="popup-quote"></p>
+            <p class="popup-source" id="popup-source"></p>
+            <p class="popup-reason" id="popup-reason"></p>
+            <p class="popup-counter" id="popup-counter"></p>
+            <button class="popup-close" onclick="closePopup()">Perhaps I Should Reconsider...</button>
+        </div>
+    </div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        // =============================================
+        // PERSONALIZED RESPONSES
+        // =============================================
+        const responses = [
+            {
+                emoji: "📎",
+                quote: "Would I rather be feared or loved? Easy. Both. I want people to be afraid of how much they love me.",
+                source: "— Michael Scott, The Office",
+                reason: "Pannu.. Naaa... 🥺"
+            },
+            {
+                emoji: "🚨",
+                quote: "Cool. Cool cool cool cool cool. No doubt, no doubt, no doubt.",
+                source: "— Jake Peralta, Brooklyn Nine-Nine",
+                reason: "Yappa Pa Hmmmm... Yappa Pa humnya humnya 😤"
+            },
+            {
+                emoji: "👨‍👩‍👧‍👦",
+                quote: "I'm the cool dad, that's my thang. I'm hip, I surf the web, I text. LOL: Laugh Out Loud, OMG: Oh My God, WTF: Why The Face.",
+                source: "— Phil Dunphy, Modern Family",
+                reason: "Pallu come-on come-on, like seriously? come-on 😩"
+            },
+            {
+                emoji: "🧇",
+                quote: "We need to remember what's important in life: friends, waffles, work. Or waffles, friends, work. Doesn't matter, but work is third.",
+                source: "— Leslie Knope, Parks and Recreation",
+                reason: "Lavde na bhojam, pleeeassseee !!!! 🙏"
+            },
+            {
+                emoji: "🚗",
+                quote: "Driver picks the music, shotgun shuts his cakehole.",
+                source: "— Dean Winchester, Supernatural",
+                reason: "Tula me maza chicken detoy ki nahi pallu, Please? 🍗"
+            },
+            {
+                emoji: "📖",
+                quote: "It is a truth universally acknowledged, that a single man in possession of a good heart, must be in want of your 'Yes'.",
+                source: "— Adapted from Jane Austen, Pride and Prejudice",
+                reason: "I will watch all your movie recommendations, I promise. 🎬"
+            },
+            {
+                emoji: "⚡",
+                quote: "Happiness can be found, even in the darkest of times, if one only remembers to say yes to their Valentine.",
+                source: "— Adapted from Albus Dumbledore, Harry Potter",
+                reason: "I will read at least 3 books this year, I betchya! 📚"
+            },
+            {
+                emoji: "🔱",
+                quote: "If my life is going to mean anything, I have to live it myself. And step one: getting you to say yes.",
+                source: "— Adapted from Percy Jackson",
+                reason: "Dates Dates Dates and lots of Dates for you. 🌹"
+            },
+            {
+                emoji: "🎵",
+                quote: "Pal, pal dil ke paas, tum rehti ho... so please don't go anywhere and just say yes!",
+                source: "— Inspired by Kishore Kumar",
+                reason: "I will eternally say \"Pallavi Patil you are Amazing detective/human\" 🕵️‍♀️💖"
+            }
+        ];
+
+        let currentResponseIndex = 0;
+        let noClickCount = 0;
+
+        // =============================================
+        // SAY NO — Show popup with cycling responses
+        // =============================================
+        function sayNo() {
+            noClickCount++;
+            const popup = document.getElementById('popup');
+            const emoji = document.getElementById('popup-emoji');
+            const quote = document.getElementById('popup-quote');
+            const source = document.getElementById('popup-source');
+            const reason = document.getElementById('popup-reason');
+            const counter = document.getElementById('popup-counter');
+
+            const response = responses[currentResponseIndex];
+
+            emoji.textContent = response.emoji;
+            quote.textContent = `"${response.quote}"`;
+            source.textContent = response.source;
+            reason.textContent = response.reason;
+            counter.textContent = `Attempt ${noClickCount} — You know the answer, Pannu.`;
+
+            popup.classList.add('active');
+
+            // Cycle
+            currentResponseIndex = (currentResponseIndex + 1) % responses.length;
+
+            // After 3rd "No", grow the Yes button a little
+            const yesBtn = document.querySelector('.btn-yes');
+            if (noClickCount >= 3) {
+                const scale = Math.min(1 + noClickCount * 0.06, 1.5);
+                yesBtn.style.transform = `scale(${scale})`;
+                yesBtn.style.boxShadow = `0 ${4 + noClickCount * 2}px ${15 + noClickCount * 5}px rgba(107,68,35,0.4)`;
+            }
+
+            // After 5th "No", shrink the No button
+            const noBtn = document.getElementById('noBtn');
+            if (noClickCount >= 5) {
+                const shrink = Math.max(1 - (noClickCount - 4) * 0.12, 0.3);
+                noBtn.style.transform = `scale(${shrink})`;
+                noBtn.style.opacity = Math.max(1 - (noClickCount - 4) * 0.15, 0.2);
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        // Close popup on outside click
+        document.getElementById('popup').addEventListener('click', function (e) {
+            if (e.target === this) closePopup();
+        });
+
+        // =============================================
+        // SAY YES — Celebration!
+        // =============================================
+        function sayYes() {
+            const questionSection = document.getElementById('question-section');
+            const successSection = document.getElementById('success-section');
+
+            questionSection.style.display = 'none';
+            successSection.classList.add('active');
+
+            // Launch fireworks + confetti
+            launchCelebration();
+
+            // Continuous gentle flowers
+            startCelebrationPetals();
+        }
+
+        // =============================================
+        // CONFETTI & FIREWORKS
+        // =============================================
+        function launchCelebration() {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            const confetti = [];
+            const emojis = ['❤️', '🌼', '🌻', '💛', '✨', '💝', '🌸', '💖'];
+            const colors = ['#b87333', '#d4a843', '#c97b7b', '#e8c4c4', '#6b4423', '#ff6b6b', '#ffd93d', '#ff85a1'];
+
+            // Firework class
+            class Firework {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.particles = [];
+                    const count = 60 + Math.random() * 40;
+                    for (let i = 0; i < count; i++) {
+                        const angle = (Math.PI * 2 / count) * i;
+                        const speed = 2 + Math.random() * 4;
+                        this.particles.push({
+                            x: x, y: y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            life: 1,
+                            decay: 0.01 + Math.random() * 0.015,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            size: 2 + Math.random() * 2
+                        });
+                    }
+                }
+
+                update() {
+                    this.particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.04; // gravity
+                        p.life -= p.decay;
+                        p.vx *= 0.98;
+                        p.vy *= 0.98;
+                    });
+                    this.particles = this.particles.filter(p => p.life > 0);
+                }
+
+                draw(ctx) {
+                    this.particles.forEach(p => {
+                        ctx.globalAlpha = p.life;
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    ctx.globalAlpha = 1;
+                }
+
+                isDead() { return this.particles.length === 0; }
+            }
+
+            // Confetti piece
+            class ConfettiPiece {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = -20;
+                    this.size = 8 + Math.random() * 12;
+                    this.speedY = 2 + Math.random() * 3;
+                    this.speedX = (Math.random() - 0.5) * 3;
+                    this.rotation = Math.random() * 360;
+                    this.rotSpeed = (Math.random() - 0.5) * 10;
+                    this.life = 1;
+                    this.type = Math.random() > 0.4 ? 'rect' : 'emoji';
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                }
+
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX + Math.sin(this.y * 0.02) * 0.5;
+                    this.rotation += this.rotSpeed;
+                    if (this.y > canvas.height + 20) this.life = 0;
+                }
+
+                draw(ctx) {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation * Math.PI / 180);
+                    if (this.type === 'rect') {
+                        ctx.fillStyle = this.color;
+                        ctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 2);
+                    } else {
+                        ctx.font = `${this.size}px serif`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(this.emoji, 0, 0);
+                    }
+                    ctx.restore();
+                }
+
+                isDead() { return this.life <= 0; }
+            }
+
+            const fireworks = [];
+            let frame = 0;
+            const totalFrames = 300; // ~5 seconds at 60fps
+
+            function animate() {
+                frame++;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Launch fireworks in bursts
+                if (frame < 180) {
+                    if (frame % 25 === 0 || frame === 1) {
+                        const fx = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+                        const fy = Math.random() * canvas.height * 0.5 + canvas.height * 0.1;
+                        fireworks.push(new Firework(fx, fy));
+                    }
+                }
+
+                // Spawn confetti
+                if (frame < 200) {
+                    if (frame % 3 === 0) {
+                        confetti.push(new ConfettiPiece());
+                    }
+                }
+
+                // Update & draw fireworks
+                fireworks.forEach(fw => { fw.update(); fw.draw(ctx); });
+                for (let i = fireworks.length - 1; i >= 0; i--) {
+                    if (fireworks[i].isDead()) fireworks.splice(i, 1);
+                }
+
+                // Update & draw confetti
+                confetti.forEach(c => { c.update(); c.draw(ctx); });
+                for (let i = confetti.length - 1; i >= 0; i--) {
+                    if (confetti[i].isDead()) confetti.splice(i, 1);
+                }
+
+                if (frame < totalFrames || fireworks.length > 0 || confetti.length > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
+        }
+
+        // Gentle celebration petals after fireworks
+        function startCelebrationPetals() {
+            const flowers = ['🌼', '🌻', '💛', '🌸', '❤️', '✨', '🌼', '🌻'];
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.className = 'ambient-petal';
+                petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (6 + Math.random() * 5) + 's';
+                petal.style.fontSize = (1.2 + Math.random() * 1.8) + 'rem';
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), 12000);
+            }, 300);
+        }
+
+        // =============================================
+        // AMBIENT EFFECTS — Floating petals & sparkles
+        // =============================================
+        function initAmbientPetals() {
+            const flowers = ['🌼', '🌻', '🌸', '🌼', '🌻'];
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'ambient-petal';
+                    petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.animationDuration = (10 + Math.random() * 8) + 's';
+                    petal.style.fontSize = (1.2 + Math.random() * 1.3) + 'rem';
+                    document.body.appendChild(petal);
+                    petal.addEventListener('animationend', () => {
+                        petal.remove();
+                        // Respawn
+                        initAmbientPetals_single();
+                    });
+                }, i * 1200);
+            }
+        }
+
+        function initAmbientPetals_single() {
+            const flowers = ['🌼', '🌻', '🌸', '🌼', '🌻'];
+            const petal = document.createElement('div');
+            petal.className = 'ambient-petal';
+            petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (10 + Math.random() * 8) + 's';
+            petal.style.fontSize = (1.2 + Math.random() * 1.3) + 'rem';
+            document.body.appendChild(petal);
+            petal.addEventListener('animationend', () => {
+                petal.remove();
+                initAmbientPetals_single();
+            });
+        }
+
+        function initSparkles() {
+            const container = document.getElementById('sparkleContainer');
+            for (let i = 0; i < 40; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 6 + 's';
+                sparkle.style.animationDuration = (3 + Math.random() * 4) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        // =============================================
+        // DAY / NIGHT THEME
+        // =============================================
+        function initTheme() {
+            const hour = new Date().getHours();
+            // Night: 6pm (18) to 6am (6)
+            const isNight = hour >= 18 || hour < 6;
+            if (isNight) {
+                document.body.classList.add('night-mode');
+                initStars();
+            }
+        }
+
+        function initStars() {
+            const canvas = document.getElementById('starsCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                drawStars();
+            });
+
+            const stars = [];
+            for (let i = 0; i < 150; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.8 + 0.3,
+                    alpha: Math.random(),
+                    alphaDir: (Math.random() - 0.5) * 0.02,
+                    color: Math.random() > 0.8
+                        ? `rgba(240,215,140,` // golden stars
+                        : `rgba(220,220,255,`  // white-blue stars
+                });
+            }
+
+            function drawStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(s => {
+                    s.alpha += s.alphaDir;
+                    if (s.alpha <= 0.1 || s.alpha >= 1) s.alphaDir *= -1;
+                    s.alpha = Math.max(0.1, Math.min(1, s.alpha));
+
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = s.color + s.alpha + ')';
+                    ctx.fill();
+
+                    // Glow for bigger stars
+                    if (s.radius > 1.2) {
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, s.radius * 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = s.color + (s.alpha * 0.15) + ')';
+                        ctx.fill();
+                    }
+                });
+            }
+
+            function animateStars() {
+                drawStars();
+                requestAnimationFrame(animateStars);
+            }
+            animateStars();
+        }
+
+        // =============================================
+        // SOUND EFFECTS (Web Audio API)
+        // =============================================
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // Soft chime — two gentle sine tones
+        function playChime() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            [523.25, 659.25, 783.99].forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0, now + i * 0.15);
+                gain.gain.linearRampToValueAtTime(0.12, now + i * 0.15 + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.8);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + i * 0.15);
+                osc.stop(now + i * 0.15 + 0.8);
+            });
+        }
+
+        // Whoosh for popup open
+        function playWhoosh() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const bufferSize = ctx.sampleRate * 0.3;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+            }
+
+            const source = ctx.createBufferSource();
+            source.buffer = buffer;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(800, now);
+            filter.frequency.exponentialRampToValueAtTime(200, now + 0.25);
+            filter.Q.value = 1;
+
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+
+            source.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            source.start(now);
+        }
+
+        // Soft click
+        function playClick() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = 800;
+            osc.frequency.exponentialRampToValueAtTime(400, now + 0.08);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+        }
+
+        // Celebration fanfare
+        function playFanfare() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const melody = [
+                { freq: 523.25, time: 0, dur: 0.2 },  // C5
+                { freq: 659.25, time: 0.15, dur: 0.2 },  // E5
+                { freq: 783.99, time: 0.3, dur: 0.2 },  // G5
+                { freq: 1046.5, time: 0.45, dur: 0.6 },  // C6
+                { freq: 783.99, time: 0.6, dur: 0.15 }, // G5
+                { freq: 1046.5, time: 0.75, dur: 0.8 },  // C6 (held)
+            ];
+
+            melody.forEach(note => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = note.freq;
+
+                gain.gain.setValueAtTime(0, now + note.time);
+                gain.gain.linearRampToValueAtTime(0.15, now + note.time + 0.03);
+                gain.gain.setValueAtTime(0.15, now + note.time + note.dur * 0.6);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + note.time + note.dur);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + note.time);
+                osc.stop(now + note.time + note.dur + 0.05);
+            });
+
+            // Add a soft shimmery chord underneath
+            [523.25, 659.25, 783.99].forEach(freq => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = freq / 2;
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.06, now + 0.3);
+                gain.gain.setValueAtTime(0.06, now + 1.0);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 2.1);
+            });
+        }
+
+        // Wire sounds into existing functions
+        const origSayNo = sayNo;
+        sayNo = function () {
+            playWhoosh();
+            origSayNo();
+        };
+
+        const origClosePopup = closePopup;
+        closePopup = function () {
+            playClick();
+            origClosePopup();
+        };
+
+        const origSayYes = sayYes;
+        sayYes = function () {
+            playFanfare();
+            origSayYes();
+        };
+
+        // Play entrance chime after a short delay (requires user gesture on some browsers)
+        document.addEventListener('click', function initChime() {
+            playChime();
+            document.removeEventListener('click', initChime);
+        }, { once: true });
+
+        // =============================================
+        // INITIALIZE EVERYTHING
+        // =============================================
+        initTheme();
+        initAmbientPetals();
+        initSparkles();
+    </script>
+</body>
+
+</html>
